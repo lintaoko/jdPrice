@@ -3,17 +3,17 @@ package config;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
 
-@Configuration
 
-@MapperScan(basePackages = "db/mapper")
-public class DataConfig {
+@Configuration
+@MapperScan(basePackages = "dao")
+@ComponentScan(basePackages = {"service"})
+public class MysqlConfig {
 
     @Bean
     public DataSource dataSource() {
@@ -29,20 +29,10 @@ public class DataConfig {
 
 
     @Bean
-    public DataSourceTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(dataSource());
-    }
-
-    @Bean
-    public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) throws Exception {
+    public SqlSessionFactoryBean sqlSessionFactory(DataSource dataSource) {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);
-        sqlSessionFactoryBean.setTypeAliasesPackage("db/po");
-        sqlSessionFactoryBean
-                .setMapperLocations(
-                        new PathMatchingResourcePatternResolver()
-                                .getResources("classpath:db/mapper/*.xml")
-                );
+        sqlSessionFactoryBean.setTypeAliasesPackage("model");
         return sqlSessionFactoryBean;
     }
 }

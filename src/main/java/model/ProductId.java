@@ -1,7 +1,7 @@
-package db.po;
+package model;
 
 public class ProductId {
-    private Long productId;
+    private String productId;
 
     private String productType;
 
@@ -11,11 +11,11 @@ public class ProductId {
 
     private String imgUrl;
 
-    public Long getProductId() {
+    public String getProductId() {
         return productId;
     }
 
-    public void setProductId(Long productId) {
+    public void setProductId(String productId) {
         this.productId = productId;
     }
 
