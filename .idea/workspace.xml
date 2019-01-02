@@ -176,8 +176,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="51" />
-    <option name="y" value="24" />
+    <option name="x" value="623" />
+    <option name="y" value="650" />
     <option name="width" value="1920" />
     <option name="height" value="977" />
   </component>
@@ -371,11 +371,11 @@
       <server-settings>
         <option name="BASE_DIRECTORY_NAME" value="Unnamed_jdProduct" />
       </server-settings>
-      <predefined_log_file enabled="true" id="Tomcat" />
-      <predefined_log_file enabled="true" id="Tomcat Catalina" />
-      <predefined_log_file id="Tomcat Manager" />
-      <predefined_log_file id="Tomcat Host Manager" />
-      <predefined_log_file id="Tomcat Localhost Access" />
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="56798" />
       </RunnerSettings>
@@ -435,11 +435,11 @@
       <server-settings>
         <option name="BASE_DIRECTORY_NAME" value="_jdProduct" />
       </server-settings>
-      <predefined_log_file enabled="true" id="Tomcat" />
-      <predefined_log_file enabled="true" id="Tomcat Catalina" />
-      <predefined_log_file id="Tomcat Manager" />
-      <predefined_log_file id="Tomcat Host Manager" />
-      <predefined_log_file id="Tomcat Localhost Access" />
+      <predefined_log_file id="Tomcat" enabled="true" />
+      <predefined_log_file id="Tomcat Catalina" enabled="true" />
+      <predefined_log_file id="Tomcat Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Host Manager" enabled="false" />
+      <predefined_log_file id="Tomcat Localhost Access" enabled="false" />
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="56798" />
       </RunnerSettings>
@@ -494,8 +494,8 @@
     </configuration>
     <list>
       <item itemvalue="Application.GeneratorSqlmap" />
-      <item itemvalue="JUnit.DataConfigTest" />
       <item itemvalue="Tomcat Server.Unnamed" />
+      <item itemvalue="JUnit.DataConfigTest" />
     </list>
     <recent_temporary>
       <list>
