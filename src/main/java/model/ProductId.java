@@ -1,11 +1,24 @@
 package model;
 
-public class ProductId {
+import java.io.Serializable;
+
+public class ProductId  implements Serializable {
     private String productId;
 
     private String productType;
 
     private String assortment;
+
+    public ProductId(String productId, String productType, String assortment, String createTime, String imgUrl) {
+        this.productId = productId;
+        this.productType = productType;
+        this.assortment = assortment;
+        this.createTime = createTime;
+        this.imgUrl = imgUrl;
+    }
+
+    public ProductId() {
+    }
 
     private String createTime;
 

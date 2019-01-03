@@ -92,7 +92,7 @@ public class MysqlConfigTest {
          **/
         ProductId productId = productIdService.selectByPrimaryKey("38554787911");
         assertSameModel(productId);
-            //TODO 343
+
     }
 
 
