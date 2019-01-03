@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.BoundListOperations;
@@ -31,7 +32,9 @@ public class RedisConfigTest {
     @Autowired
     RedisConnectionFactory redisConnectionFactory;
 
+
     @Autowired
+
     RedisTemplate<String, ProductId> redisTemplate;
 
 

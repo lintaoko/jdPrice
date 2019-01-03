@@ -28,8 +28,7 @@ public class RedisConfig {
         redis.setKeySerializer(new StringRedisSerializer());
         // 序列化JSON类型的Value
         redis.setValueSerializer(
-                new Jackson2JsonRedisSerializer<ProductId>(ProductId.class)
-        );
+                new Jackson2JsonRedisSerializer<ProductId>(ProductId.class));
         return redis;
     }
 }

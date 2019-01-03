@@ -5,6 +5,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 
 @Configuration
-@Import({CachingConfig.class, MysqlConfig.class, RedisConfig.class})
+@Import({CachingConfig.class, MysqlConfig.class})
 public class RootConfig {
 }
