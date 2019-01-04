@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Repository;
 
 @Configuration
 // 启用缓存
@@ -21,13 +22,14 @@ public class CachingConfig {
 //        return new ConcurrentMapCacheManager();
 //    }
 
-//    @Bean
-//    public RedisTemplate<String,String> redisTemplate(
-//            RedisConnectionFactory cf
-//    ){
-//        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
-//        redisTemplate.setConnectionFactory(cf);
-//        redisTemplate.afterPropertiesSet();
-//        return redisTemplate;
-//    }
+
+    @Bean(name = "cache")
+    public RedisTemplate<String,String> redisTemplate(
+            RedisConnectionFactory cf
+    ){
+        RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
+        redisTemplate.setConnectionFactory(cf);
+        redisTemplate.afterPropertiesSet();
+        return redisTemplate;
+    }
 }

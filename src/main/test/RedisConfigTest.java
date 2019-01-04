@@ -1,7 +1,5 @@
 
-import config.MysqlConfig;
-import config.RedisConfig;
-import config.RootConfig;
+import config.*;
 import model.ProductId;
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,9 +32,12 @@ public class RedisConfigTest {
 
 
     @Autowired
+    @Qualifier("data")
+    RedisTemplate<String, ProductId> redisDataTemplate;
 
-    RedisTemplate<String, ProductId> redisTemplate;
-
+    @Autowired
+    @Qualifier("cache")
+    RedisTemplate<String, String> redisCacheTemplate;
 
     @Test
     public void redisConnectionFactoryShouldNotBeNull() {
@@ -47,7 +48,7 @@ public class RedisConfigTest {
 
     @Test
     public void redisTemplateShouldNotBeNull() {
-        assertNotNull(redisTemplate);
+        assertNotNull(redisDataTemplate);
     }
 
     @Test
@@ -66,18 +67,18 @@ public class RedisConfigTest {
 
         ProductId productId = new ProductId("1231", "sad", "sad", "dasd", "dasd");
         // 操作具有简单值的条目
-        redisTemplate.opsForValue().set(productId.getProductId(), productId);
-        ProductId s = redisTemplate.opsForValue().get(productId.getProductId());
+        redisDataTemplate.opsForValue().set(productId.getProductId(), productId);
+        ProductId s = redisDataTemplate.opsForValue().get(productId.getProductId());
         assertEquals("sad", s.getAssortment());
-        redisTemplate.delete("1231");
+        redisDataTemplate.delete("1231");
     }
 
     //
     @Test
     public void redisOpsForSet() {
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        int i = redisTemplate.opsForSet().size("jdspider:dupefilter").intValue();
-        int j = redisTemplate.opsForZSet().size("jdspider:requests").intValue();
+        redisDataTemplate.setKeySerializer(new StringRedisSerializer());
+        int i = redisDataTemplate.opsForSet().size("jdspider:dupefilter").intValue();
+        int j = redisDataTemplate.opsForZSet().size("jdspider:requests").intValue();
 
     }
 
@@ -85,10 +86,10 @@ public class RedisConfigTest {
     @Test
     public void redisOpsForList() {
         ProductId productId = new ProductId("1231", "sad", "sad", "dasd", "dasd");
-        redisTemplate.opsForList().leftPush("cart", productId);
-        redisTemplate.opsForList().rightPush("cart", productId);
-        ProductId first = redisTemplate.opsForList().leftPop("cart");
-        ProductId second = redisTemplate.opsForList().rightPop("cart");
+        redisDataTemplate.opsForList().leftPush("cart", productId);
+        redisDataTemplate.opsForList().rightPush("cart", productId);
+        ProductId first = redisDataTemplate.opsForList().leftPop("cart");
+        ProductId second = redisDataTemplate.opsForList().rightPop("cart");
 //        System.out.println(first.getProductType());
 //        System.out.println(second.getProductType());
     }
@@ -96,21 +97,21 @@ public class RedisConfigTest {
     @Test
     public void redisOpsOnSet() {
         ProductId productId = new ProductId("1231", "sad", "sad", "dasd", "dasd");
-        redisTemplate.opsForSet().add("cart1", productId);
-        redisTemplate.opsForSet().add("cart2", productId);
+        redisDataTemplate.opsForSet().add("cart1", productId);
+        redisDataTemplate.opsForSet().add("cart2", productId);
 //        redisTemplate.opsForSet().remove("card1", productId);
 //        System.out.println(redisTemplate.opsForSet().randomMember("card1").getImgUrl());
 //        redisTemplate.delete("card1");
 //        redisTemplate.delete("card2");
-        BoundListOperations<String, ProductId> cart = redisTemplate
+        BoundListOperations<String, ProductId> cart = redisDataTemplate
                 .boundListOps("cart");
 
         cart.rightPush(productId);
         ProductId productId2 = new ProductId("121", "sd", "sd", "dsd", "dsd");
         cart.rightPush(productId2);
-        redisTemplate.delete("cart1");
-        redisTemplate.delete("cart2");
-        redisTemplate.delete("cart");
+        redisDataTemplate.delete("cart1");
+        redisDataTemplate.delete("cart2");
+        redisDataTemplate.delete("cart");
 
     }
 

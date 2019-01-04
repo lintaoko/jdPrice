@@ -1,6 +1,7 @@
 package config;
 
 import model.ProductId;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -20,7 +21,8 @@ public class RedisConfig {
         return cf;
     }
 
-    @Bean
+
+    @Bean(name = "data")
     public RedisTemplate<String, ProductId> redisTemplate(RedisConnectionFactory cf) {
         RedisTemplate<String, ProductId> redis = new RedisTemplate<>();
         redis.setConnectionFactory(cf);
