@@ -4,6 +4,7 @@ import dao.ProductIdMapper;
 import model.ProductId;
 import org.springframework.beans.PropertyMatches;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service("productIdService")
@@ -14,6 +15,7 @@ public class ProductIdServiceImp implements ProductIdService {
     public void setProductIdMapper(ProductIdMapper productIdMapper) {
         this.productIdMapper = productIdMapper;
     }
+
 
     @Override
     public ProductId selectByPrimaryKey(String id) {

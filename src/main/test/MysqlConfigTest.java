@@ -1,6 +1,7 @@
 import config.MysqlConfig;
 import dao.ProductIdMapper;
 import model.ProductId;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -94,6 +95,8 @@ public class MysqlConfigTest {
         assertSameModel(productId);
 
     }
+
+
 
 
 }

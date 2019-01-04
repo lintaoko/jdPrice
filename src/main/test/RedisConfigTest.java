@@ -7,6 +7,7 @@ import org.junit.contrib.java.lang.system.SystemOutRule;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.cache.CacheManager;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.BoundListOperations;
@@ -39,6 +40,9 @@ public class RedisConfigTest {
     @Qualifier("cache")
     RedisTemplate<String, String> redisCacheTemplate;
 
+    @Autowired
+    CacheManager cacheManager;
+
     @Test
     public void redisConnectionFactoryShouldNotBeNull() {
         assertNotNull(redisConnectionFactory);
@@ -51,6 +55,11 @@ public class RedisConfigTest {
         assertNotNull(redisDataTemplate);
     }
 
+    @Test
+    public void cacheManagerShouldNotBeNull() {
+        assertNotNull(cacheManager);
+
+    }
     @Test
     public void redisGreeting() {
         RedisConnection rs = redisConnectionFactory.getConnection();
