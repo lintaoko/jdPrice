@@ -91,6 +91,7 @@ public class MysqlConfigTest {
          * @params []
          * @return void
          **/
+
         ProductId productId = productIdService.selectByPrimaryKey("38554787911");
         assertSameModel(productId);
 
