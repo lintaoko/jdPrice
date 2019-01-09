@@ -12,6 +12,8 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
+import service.ProductIdService;
+import service.ProductIdServiceImp;
 
 @Configuration
 // 启用缓存
@@ -33,5 +35,10 @@ public class CachingConfig {
     @Bean
     public CacheManager cacheManager(@Qualifier("cache") RedisTemplate redisTemplate) {
         return new RedisCacheManager(redisTemplate);
+    }
+
+    @Bean
+    public ProductIdService productIdService(){
+        return new ProductIdServiceImp();
     }
 }

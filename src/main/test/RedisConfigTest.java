@@ -15,6 +15,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import service.ProductIdService;
+import service.ProductIdServiceImp;
 
 
 import static org.junit.Assert.assertEquals;
@@ -30,6 +32,9 @@ public class RedisConfigTest {
 
     @Autowired
     RedisConnectionFactory redisConnectionFactory;
+
+    @Autowired
+    ProductIdService productIdServiceImp;
 
 
     @Autowired
@@ -82,6 +87,14 @@ public class RedisConfigTest {
         redisDataTemplate.delete("1231");
     }
 
+    @Test
+    public void redisCacheTest(){
+        // 先要在Config 中注册接口
+       ProductId productId =  productIdServiceImp.selectByPrimaryKey("38554787911");
+        System.out.println(productId.getProductId());
+        System.out.println(productId.getCreateTime());
+    }
+
     //
     @Test
     public void redisOpsForSet() {
@@ -123,6 +136,9 @@ public class RedisConfigTest {
         redisDataTemplate.delete("cart");
 
     }
+
+
+
 
 
 }
