@@ -8,7 +8,8 @@ import org.springframework.context.annotation.ImportResource;
 @Configuration
 @Import({CachingConfig.class
         , MysqlConfig.class
-        , MethodSecurityConfig.class})
+        , MethodSecurityConfig.class
+        , WebConfig.class})
 @ComponentScan(basePackages = "controller")
 public class RootConfig {
 }
