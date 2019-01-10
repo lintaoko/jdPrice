@@ -1,21 +1,25 @@
 package controller;
 
+import model.ProductId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import service.ProductIdService;
 
 @RestController
 @RequestMapping("/productId")
-public class ProductIdController {
+    public class ProductIdController {
     @Autowired
     ProductIdService productIdService;
 
 
-//    @RequestMapping(method = RequestMethod.GET)
-//    public
+    @RequestMapping(method = RequestMethod.GET,
+    produces = "application/json")
+    public @ResponseBody ProductId productId(
+            @RequestParam(value = "id") String id
+    ){
+        return productIdService.selectByPrimaryKey(id);
+    }
 
 
 
