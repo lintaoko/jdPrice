@@ -1,5 +1,6 @@
 package controller;
 
+import model.Error;
 import model.ProductId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,24 +24,7 @@ public class ProductIdController {
 //        return productIdService.selectByPrimaryKey(id);
 //    }
 
-    public class Error {
-        private int code;
-        private String message;
 
-        public Error(int code, String message) {
-            this.code = code;
-            this.message = message;
-        }
-
-
-        public int getCode() {
-            return code;
-        }
-
-        public String getMessage() {
-            return message;
-        }
-    }
 
 
     @RequestMapping(value = "/{id}",
