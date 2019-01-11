@@ -1,10 +1,7 @@
 package dao;
 
 import model.User;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 public interface UserMapper {
     @Select("select * from product_user where id = #{Id}")
@@ -17,5 +14,12 @@ public interface UserMapper {
             }
     )
     User selectById(@Param("Id") int id);
+
+    @Insert("insert into product_user(username,password,email)" +
+            " value(#{userName},#{passWord},#{email})")
+    void saveUser(@Param("userName") String userName,
+                  @Param("passWord") String passWord,
+                  @Param("email") String email);
+
 
 }

@@ -4,4 +4,7 @@ import model.User;
 
 public interface UserService {
     User selectById(int id);
+
+    User saveUser(User user);
+
 }

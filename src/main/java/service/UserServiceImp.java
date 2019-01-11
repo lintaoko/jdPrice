@@ -16,7 +16,16 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
+    public User saveUser(User user) {
+        this.userMapper.saveUser(user.getUserName(), user.getPassWord(), user.getEmail());
+        return user;
+    }
+
+
+    @Override
     public User selectById(int id) {
         return userMapper.selectById(id);
     }
+
+
 }
