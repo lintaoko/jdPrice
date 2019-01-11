@@ -1,6 +1,7 @@
 import config.MysqlConfig;
 import dao.ProductIdMapper;
 import model.ProductId;
+import model.User;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import service.ProductIdService;
+import service.UserService;
 
 import javax.sql.DataSource;
 
@@ -27,6 +29,9 @@ public class MysqlConfigTest {
 
     @Autowired
     ProductIdMapper productIdMapper;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     ProductIdService productIdService;
@@ -83,6 +88,8 @@ public class MysqlConfigTest {
 
     }
 
+
+
     @Test
     public void productIdServiceCanSelectItem() {
         /**
@@ -98,6 +105,10 @@ public class MysqlConfigTest {
     }
 
 
-
+    @Test
+    public void userServiceCanSelectItem(){
+        User user = userService.selectById(1);
+        assertNotNull(user);
+    }
 
 }
