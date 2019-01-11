@@ -1,5 +1,6 @@
 package controller;
 
+import exception.ProductIdNotFoundException;
 import model.Error;
 import model.ProductId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import service.ProductIdService;
+
+import java.nio.file.ProviderNotFoundException;
 
 @RestController
 @RequestMapping("/productId")
@@ -25,8 +28,6 @@ public class ProductIdController {
 //    }
 
 
-
-
     @RequestMapping(value = "/{id}",
             method = RequestMethod.GET)
     public
@@ -35,16 +36,20 @@ public class ProductIdController {
     ResponseEntity<?>
     productIdById(@PathVariable String id) {
         ProductId productId = productIdService.selectByPrimaryKey(id);
-//        HttpStatus status = productId != null ?
-//                HttpStatus.OK : HttpStatus.NOT_FOUND;
-//        return new ResponseEntity<ProductId>(
-//                productId, status
-//        );
         if (productId == null) {
-            Error error = new Error(4, "ProductId [" + id + "] not found");
-            return new ResponseEntity<Error>(error, HttpStatus.NOT_FOUND);
+            throw new ProductIdNotFoundException(id);
         }
         return new ResponseEntity<ProductId>(productId, HttpStatus.OK);
+    }
+
+
+    @ExceptionHandler(ProductIdNotFoundException.class)
+    public ResponseEntity<Error> productIdNotFound( 
+            ProductIdNotFoundException e
+    ) {
+        String productId = e.getProductId();
+        Error error = new Error(4, "ProductId [" + productId + "] not found");
+        return new ResponseEntity<Error>(error, HttpStatus.NOT_FOUND);
     }
 
 
