@@ -109,6 +109,7 @@ public class MysqlConfigTest {
     public void userServiceCanSelectItem(){
         User user = userService.selectById(1);
         assertNotNull(user);
+        System.out.println(user.getEmail());
     }
 
 }

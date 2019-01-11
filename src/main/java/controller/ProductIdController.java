@@ -33,7 +33,7 @@ public class ProductIdController {
     public
 //    @ResponseBody
         // 负载部分会渲染在响应体中
-    ResponseEntity<?>
+    ResponseEntity<ProductId>
     productIdById(@PathVariable String id) {
         ProductId productId = productIdService.selectByPrimaryKey(id);
         if (productId == null) {
