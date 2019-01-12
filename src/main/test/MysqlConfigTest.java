@@ -105,18 +105,18 @@ public class MysqlConfigTest {
     }
 
 
-    @Test
-    public void addUser(){
-        User user = new User("dd",
-                "123456zjd",
-                "zhujingdi1998@gmail.com");
-        userService.saveUser(user);
-    }
+//    @Test
+//    public void addUser(){
+//        User user = new User("dd",
+//                "123456zjd",
+//                "zhujingdi1998@gmail.com");
+//        userService.saveUser(user);
+//    }
 
     @Test
     public void userServiceCanSelectItem(){
         User user = userService.selectById(1);
-        assertNotNull(user);
+//        assertNotNull(user);
         System.out.println(user.getEmail());
     }
 
