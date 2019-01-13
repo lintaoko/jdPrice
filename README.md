@@ -1,2 +1,2 @@
 # jdPrice
-基于spring-boot的比价网站
+基于scrapy 和 spring-boot的比价网站
