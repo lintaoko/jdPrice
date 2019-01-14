@@ -30,6 +30,16 @@ public class UserController {
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
+    @RequestMapping(
+            method = RequestMethod.POST,
+            consumes = "application/json"
+    )
+    @ResponseStatus(HttpStatus.CREATED)
+    public User saveUser(@RequestBody User user) {
+        // 拿到User 对象
+
+        return userService.saveUser(user);
+    }
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<Error> userNotFound(
           UserNotFoundException e
