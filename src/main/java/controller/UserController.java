@@ -50,7 +50,9 @@ public class UserController {
 //                        + gotUser.getUserId()
 //        );
 //        headers.setLocation(locationURI);
-        URI locationURI = ucb.path("/user/").path(String.valueOf(gotUser.getUserId())).build()
+        URI locationURI = ucb.path("/user/")
+                .path(String.valueOf(gotUser.getUserId()))
+                .build()
                 .toUri();
         headers.setLocation(locationURI);
         ResponseEntity<User> responseEntity =
