@@ -9,10 +9,14 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.web.client.RestTemplate;
 import service.ProductIdService;
 import service.UserService;
 
 import javax.sql.DataSource;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -119,6 +123,30 @@ public class MysqlConfigTest {
 //        assertNotNull(user);
         System.out.println(user.getEmail());
     }
+
+    @Test
+    public void fetchUserId(){
+        Map<String, String>
+                urlVariables = new HashMap<>();
+        urlVariables.put("id", "1");
+        RestTemplate rest = new RestTemplate();
+        User user = rest.getForObject("http://localhost:8080/jdProduct_war/user/1",
+                User.class, urlVariables);
+        System.out.println(user.getEmail());
+    }
+
+    @Test
+    public void postUserId(){
+        RestTemplate rest = new RestTemplate();
+        User user = new User("dd", "123456zjd", "9864945533@qq.com");
+        rest.postForObject("http://localhost:8080/jdProduct_war/user", user, User.class);
+
+    }
+
+
+
+
+
 
 
 }
