@@ -1,5 +1,6 @@
 import config.MysqlConfig;
 import dao.ProductIdMapper;
+import dao.UserMapper;
 import model.ProductId;
 import model.User;
 import org.junit.After;
@@ -33,6 +34,9 @@ public class MysqlConfigTest {
 
     @Autowired
     ProductIdMapper productIdMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     @Autowired
     UserService userService;
@@ -84,14 +88,13 @@ public class MysqlConfigTest {
         testProductId.setProductId("38554787911");
         testProductId.setProductType("");
 
-        assertEquals(testProductId.getCreateTime(), productId.getCreateTime());
+//        assertEquals(testProductId.getCreateTime(), productId.getCreateTime());
         assertEquals(testProductId.getAssortment(), productId.getAssortment());
         assertEquals(testProductId.getProductType(), productId.getProductType());
         assertEquals(testProductId.getImgUrl(), productId.getImgUrl());
         assertEquals(testProductId.getProductId(), productId.getProductId());
 
     }
-
 
 
     @Test
@@ -118,33 +121,30 @@ public class MysqlConfigTest {
 //    }
 
     @Test
-    public void userServiceCanSelectItem(){
+    public void userServiceCanSelectItem() {
         User user = userService.selectById(1);
 //        assertNotNull(user);
         System.out.println(user.getEmail());
     }
 
     @Test
-    public void fetchUserId(){
+    public void fetchUserId() {
         Map<String, String>
                 urlVariables = new HashMap<>();
         urlVariables.put("id", "1");
         RestTemplate rest = new RestTemplate();
         User user = rest.getForObject("http://localhost:8080/jdProduct_war/user/1",
                 User.class, urlVariables);
-        System.out.println(user.getEmail());
+        assertEquals("986494553@qq.com",user.getEmail());
     }
 
     @Test
-    public void postUserId(){
+    public void postUserId() {
         RestTemplate rest = new RestTemplate();
         User user = new User("dd", "123456zjd", "9864945533@qq.com");
         rest.postForObject("http://localhost:8080/jdProduct_war/user", user, User.class);
-
+        assertEquals(1,userMapper.deleteByEmail("9864945533@qq.com"));
     }
-
-
-
 
 
 

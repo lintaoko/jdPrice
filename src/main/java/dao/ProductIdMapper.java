@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Select;
 
 public interface ProductIdMapper {
 
-    @Select("SELECT * FROM product_id where product_id =  #{id}")
+    @Select("SELECT * FROM product where product_id =  #{id}")
     @Results(value = {
             @Result(column = "create_time",property = "createTime"),
             @Result(column = "assortment",property = "assortment"),

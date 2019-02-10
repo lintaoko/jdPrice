@@ -21,5 +21,6 @@ public interface UserMapper {
                   @Param("passWord") String passWord,
                   @Param("email") String email);
 
-
+    @Delete("delete from product_user where email = #{email}")
+    int deleteByEmail(@Param("email") String email);
 }

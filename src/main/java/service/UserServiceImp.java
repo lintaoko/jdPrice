@@ -27,5 +27,8 @@ public class UserServiceImp implements UserService {
         return userMapper.selectById(id);
     }
 
-
+    @Override
+    public int deleteUserById(String email) {
+        return this.userMapper.deleteByEmail(email);
+    }
 }
