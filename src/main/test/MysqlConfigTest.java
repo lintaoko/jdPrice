@@ -1,9 +1,8 @@
-import config.MysqlConfig;
-import dao.ProductIdMapper;
-import dao.UserMapper;
-import model.ProductId;
-import model.User;
-import org.junit.After;
+import info.xiantang.config.MysqlConfig;
+import info.xiantang.dao.ProductIdMapper;
+import info.xiantang.dao.UserMapper;
+import info.xiantang.model.Product;
+import info.xiantang.model.User;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -11,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
-import service.ProductIdService;
-import service.UserService;
+import info.xiantang.service.ProductIdService;
+import info.xiantang.service.UserService;
 
 import javax.sql.DataSource;
 
@@ -74,25 +73,25 @@ public class MysqlConfigTest {
          * @params []
          * @return void
          **/
-        ProductId productId = productIdMapper.selectByPrimaryKey("38554787911");
-//        System.out.println(productId.getProductType());
-        assertSameModel(productId);
+        Product product = productIdMapper.selectByPrimaryKey("38554787911");
+//        System.out.println(product.getProductType());
+        assertSameModel(product);
 
     }
 
-    public void assertSameModel(ProductId productId) {
-        ProductId testProductId = new ProductId();
-        testProductId.setAssortment("创意家居");
-        testProductId.setCreateTime("2019-01-02 05:55:43.799824");
-        testProductId.setImgUrl("http://img11.360buyimg.com/n9/s40x40_jfs/t1/17261/40/248/252147/5c087e1eE8e470211/4de7a2281e08fa35.png");
-        testProductId.setProductId("38554787911");
-        testProductId.setProductType("");
+    public void assertSameModel(Product product) {
+        Product testProduct = new Product();
+        testProduct.setAssortment("创意家居");
+        testProduct.setCreateTime("2019-01-02 05:55:43.799824");
+        testProduct.setImgUrl("http://img11.360buyimg.com/n9/s40x40_jfs/t1/17261/40/248/252147/5c087e1eE8e470211/4de7a2281e08fa35.png");
+        testProduct.setProductId("38554787911");
+        testProduct.setProductType("");
 
-//        assertEquals(testProductId.getCreateTime(), productId.getCreateTime());
-        assertEquals(testProductId.getAssortment(), productId.getAssortment());
-        assertEquals(testProductId.getProductType(), productId.getProductType());
-        assertEquals(testProductId.getImgUrl(), productId.getImgUrl());
-        assertEquals(testProductId.getProductId(), productId.getProductId());
+//        assertEquals(testProduct.getCreateTime(), product.getCreateTime());
+        assertEquals(testProduct.getAssortment(), product.getAssortment());
+        assertEquals(testProduct.getProductType(), product.getProductType());
+        assertEquals(testProduct.getImgUrl(), product.getImgUrl());
+        assertEquals(testProduct.getProductId(), product.getProductId());
 
     }
 
@@ -106,8 +105,8 @@ public class MysqlConfigTest {
          * @return void
          **/
 
-        ProductId productId = productIdService.selectByPrimaryKey("38554787911");
-        assertSameModel(productId);
+        Product product = productIdService.selectByPrimaryKey("38554787911");
+        assertSameModel(product);
 
     }
 

@@ -1,6 +1,6 @@
 
-import config.*;
-import model.ProductId;
+import info.xiantang.config.*;
+import info.xiantang.model.Product;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.SystemOutRule;
@@ -15,8 +15,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import service.ProductIdService;
-import service.ProductIdServiceImp;
+import info.xiantang.service.ProductIdService;
 
 
 import static org.junit.Assert.assertEquals;
@@ -39,7 +38,7 @@ public class RedisConfigTest {
 
     @Autowired
     @Qualifier("data")
-    RedisTemplate<String, ProductId> redisDataTemplate;
+    RedisTemplate<String, Product> redisDataTemplate;
 
     @Autowired
     @Qualifier("cache")
@@ -79,10 +78,10 @@ public class RedisConfigTest {
     @Test
     public void redisOpsForSetValue() {
 
-        ProductId productId = new ProductId("1231", "sad", "sad", "dasd", "dasd");
+        Product product = new Product("1231", "sad", "sad", "dasd", "dasd");
         // 操作具有简单值的条目
-        redisDataTemplate.opsForValue().set(productId.getProductId(), productId);
-        ProductId s = redisDataTemplate.opsForValue().get(productId.getProductId());
+        redisDataTemplate.opsForValue().set(product.getProductId(), product);
+        Product s = redisDataTemplate.opsForValue().get(product.getProductId());
         assertEquals("sad", s.getAssortment());
         redisDataTemplate.delete("1231");
     }
@@ -90,9 +89,9 @@ public class RedisConfigTest {
     @Test
     public void redisCacheTest(){
         // 先要在Config 中注册接口
-       ProductId productId =  productIdServiceImp.selectByPrimaryKey("38554787911");
-        System.out.println(productId.getProductId());
-        System.out.println(productId.getCreateTime());
+       Product product =  productIdServiceImp.selectByPrimaryKey("38554787911");
+        System.out.println(product.getProductId());
+        System.out.println(product.getCreateTime());
     }
 
     //
@@ -107,30 +106,30 @@ public class RedisConfigTest {
 
     @Test
     public void redisOpsForList() {
-        ProductId productId = new ProductId("1231", "sad", "sad", "dasd", "dasd");
-        redisDataTemplate.opsForList().leftPush("cart", productId);
-        redisDataTemplate.opsForList().rightPush("cart", productId);
-        ProductId first = redisDataTemplate.opsForList().leftPop("cart");
-        ProductId second = redisDataTemplate.opsForList().rightPop("cart");
+        Product product = new Product("1231", "sad", "sad", "dasd", "dasd");
+        redisDataTemplate.opsForList().leftPush("cart", product);
+        redisDataTemplate.opsForList().rightPush("cart", product);
+        Product first = redisDataTemplate.opsForList().leftPop("cart");
+        Product second = redisDataTemplate.opsForList().rightPop("cart");
 //        System.out.println(first.getProductType());
 //        System.out.println(second.getProductType());
     }
 
     @Test
     public void redisOpsOnSet() {
-        ProductId productId = new ProductId("1231", "sad", "sad", "dasd", "dasd");
-        redisDataTemplate.opsForSet().add("cart1", productId);
-        redisDataTemplate.opsForSet().add("cart2", productId);
-//        redisTemplate.opsForSet().remove("card1", productId);
+        Product product = new Product("1231", "sad", "sad", "dasd", "dasd");
+        redisDataTemplate.opsForSet().add("cart1", product);
+        redisDataTemplate.opsForSet().add("cart2", product);
+//        redisTemplate.opsForSet().remove("card1", product);
 //        System.out.println(redisTemplate.opsForSet().randomMember("card1").getImgUrl());
 //        redisTemplate.delete("card1");
 //        redisTemplate.delete("card2");
-        BoundListOperations<String, ProductId> cart = redisDataTemplate
+        BoundListOperations<String, Product> cart = redisDataTemplate
                 .boundListOps("cart");
 
-        cart.rightPush(productId);
-        ProductId productId2 = new ProductId("121", "sd", "sd", "dsd", "dsd");
-        cart.rightPush(productId2);
+        cart.rightPush(product);
+        Product product2 = new Product("121", "sd", "sd", "dsd", "dsd");
+        cart.rightPush(product2);
         redisDataTemplate.delete("cart1");
         redisDataTemplate.delete("cart2");
         redisDataTemplate.delete("cart");
