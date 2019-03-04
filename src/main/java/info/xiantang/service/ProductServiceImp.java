@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("productIdService")
-public class ProductIdServiceImp implements ProductIdService {
+public class ProductServiceImp implements ProductService {
     private ProductIdMapper productIdMapper;
 
     @Autowired

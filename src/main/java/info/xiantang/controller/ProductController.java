@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import info.xiantang.service.ProductIdService;
+import info.xiantang.service.ProductService;
 
 @RestController
 @RequestMapping("/productId")
-public class ProductIdController {
+public class ProductController {
     @Autowired
-    ProductIdService productIdService;
+    ProductService productService;
 
 
 //    @RequestMapping(method = RequestMethod.GET,
@@ -21,7 +21,7 @@ public class ProductIdController {
 //    public @ResponseBody Product productId(
 //            @RequestParam(value = "id") String id
 //    ){
-//        return productIdService.selectByPrimaryKey(id);
+//        return productService.selectByPrimaryKey(id);
 //    }
 
 
@@ -32,7 +32,7 @@ public class ProductIdController {
         // 负载部分会渲染在响应体中
     ResponseEntity<Product>
     productIdById(@PathVariable String id) {
-        Product product = productIdService.selectByPrimaryKey(id);
+        Product product = productService.selectByPrimaryKey(id);
         if (product == null) {
             throw new ProductIdNotFoundException(id);
         }

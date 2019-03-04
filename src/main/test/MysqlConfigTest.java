@@ -3,6 +3,7 @@ import info.xiantang.dao.ProductIdMapper;
 import info.xiantang.dao.UserMapper;
 import info.xiantang.model.Product;
 import info.xiantang.model.User;
+import info.xiantang.service.ProductService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -10,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
-import info.xiantang.service.ProductIdService;
 import info.xiantang.service.UserService;
 
 import javax.sql.DataSource;
@@ -41,7 +41,7 @@ public class MysqlConfigTest {
     UserService userService;
 
     @Autowired
-    ProductIdService productIdService;
+    ProductService productService;
 
     @Test
     public void dataSourceShouldNotBeNull() {
@@ -62,7 +62,7 @@ public class MysqlConfigTest {
 
     @Test
     public void productIdServiceShouldNotBeNull() {
-        assertNotNull(productIdService);
+        assertNotNull(productService);
     }
 
     @Test
@@ -105,7 +105,7 @@ public class MysqlConfigTest {
          * @return void
          **/
 
-        Product product = productIdService.selectByPrimaryKey("38554787911");
+        Product product = productService.selectByPrimaryKey("38554787911");
         assertSameModel(product);
 
     }
