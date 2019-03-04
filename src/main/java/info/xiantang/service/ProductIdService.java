@@ -4,6 +4,6 @@ import info.xiantang.model.Product;
 import org.springframework.cache.annotation.CachePut;
 
 public interface ProductIdService {
-    @CachePut("primaryKey")
+//    @CachePut("primaryKey")
     Product selectByPrimaryKey(String id);
 }
