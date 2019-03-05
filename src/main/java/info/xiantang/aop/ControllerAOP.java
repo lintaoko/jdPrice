@@ -19,7 +19,6 @@ public class ControllerAOP {
             result = (ResultBean<?>) pjp.proceed();
             logger.info(pjp.getSignature() + "use time:" + (System.currentTimeMillis() - startTime));
         } catch (Throwable e) {
-//            throwable.printStackTrace();
             result = handlerException(pjp, e);
         }
         return result;
