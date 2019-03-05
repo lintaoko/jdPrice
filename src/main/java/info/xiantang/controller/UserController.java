@@ -1,6 +1,7 @@
 package info.xiantang.controller;
 
 
+import info.xiantang.beans.ResultBean;
 import info.xiantang.exception.UserNotFoundException;
 import info.xiantang.model.Error;
 import info.xiantang.model.User;
@@ -20,56 +21,63 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/{id}",
-            method = RequestMethod.GET
-    )
-    public ResponseEntity<User>
-    userById(@PathVariable int id) {
-        User user = userService.selectById(id);
-        if (user == null) {
-            throw new UserNotFoundException(id);
-        }
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+
+
+    @RequestMapping("/login")
+    public ResultBean<Boolean> login(String code ) {
+        return new ResultBean<Boolean>(userService.login(code));
+
     }
-
-    @RequestMapping(
-            method = RequestMethod.POST,
-            consumes = "application/json"
-    )
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<User> saveUser(@RequestBody User user,
-                                         UriComponentsBuilder ucb
-    ) {
-
-        // 拿到User 对象
-        User gotUser = userService.saveUser(user);
-        HttpHeaders headers = new HttpHeaders();
+//    @RequestMapping(value = "/{id}",
+//            method = RequestMethod.GET
+//    )
+//    public ResponseEntity<User>
+//    userById(@PathVariable int id) {
+//        User user = userService.selectById(id);
+//        if (user == null) {
+//            throw new UserNotFoundException(id);
+//        }
+//        return new ResponseEntity<User>(user, HttpStatus.OK);
+//    }
+//
+//    @RequestMapping(
+//            method = RequestMethod.POST,
+//            consumes = "application/json"
+//    )
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public ResponseEntity<User> saveUser(@RequestBody User user,
+//                                         UriComponentsBuilder ucb
+//    ) {
+//
+//        // 拿到User 对象
+//        User gotUser = userService.saveUser(user);
+//        HttpHeaders headers = new HttpHeaders();
 //        URI locationURI = URI.create(
 //                "http://localhost:8080/jdProduct_war/user/"
 //                        + gotUser.getUserId()
 //        );
 //        headers.setLocation(locationURI);
-        URI locationURI = ucb.path("/user/")
-                .path(String.valueOf(gotUser.getUserId()))
-                .build()
-                .toUri();
-        headers.setLocation(locationURI);
-        ResponseEntity<User> responseEntity =
-                new ResponseEntity<User>(
-                        gotUser, headers, HttpStatus.CREATED
-                );
-
-        return responseEntity;
-    }
-
-    @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Error> userNotFound(
-            UserNotFoundException e
-    ) {
-        int userId = e.getUserId();
-        Error error = new Error(4, "User [" + userId + "] not found");
-        return new ResponseEntity<Error>(error, HttpStatus.NOT_FOUND);
-    }
+//        URI locationURI = ucb.path("/user/")
+//                .path(String.valueOf(gotUser.getUserId()))
+//                .build()
+//                .toUri();
+//        headers.setLocation(locationURI);
+//        ResponseEntity<User> responseEntity =
+//                new ResponseEntity<User>(
+//                        gotUser, headers, HttpStatus.CREATED
+//                );
+//
+//        return responseEntity;
+//    }
+//
+//    @ExceptionHandler(UserNotFoundException.class)
+//    public ResponseEntity<Error> userNotFound(
+//            UserNotFoundException e
+//    ) {
+//        int userId = e.getUserId();
+//        Error error = new Error(4, "User [" + userId + "] not found");
+//        return new ResponseEntity<Error>(error, HttpStatus.NOT_FOUND);
+//    }
 
 
 }

@@ -19,9 +19,9 @@ public class MysqlConfig {
     public DataSource dataSource() {
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://111.231.255.225:3306/jdProduct");
-        ds.setUsername("root");
-        ds.setPassword("123456zjd");
+        ds.setUrl("jdbc:mysql://122.228.146.38:3306/jdPrice");
+        ds.setUsername("dd");
+        ds.setPassword("zx123456");
         return ds;
     }
 
